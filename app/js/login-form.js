@@ -13,7 +13,7 @@ var LoginForm = class LoginForm {
         this.descriptionEvent = [];
 
         this.drover = new Drover(this.objectCreateInput);
-        this.validator = new Validator(this.objectCreateInput);
+        this.validator = new Validator(this.objectCreateInput, this.drover.form);
         this.localStor = new LocalStorage();
         this.init();
     }
@@ -51,10 +51,17 @@ var LoginForm = class LoginForm {
                 this.drover.validationButtonShow(isValid);
             },
             formButton = (e) => {
+                let isValid = this.validator.validationForm(this.collectionDateForm());
                 e.preventDefault();
-                this.resultSubmit = this.collectionDateForm();
-                this.localStor.createStorage(this.loginData);
-                this.cb(this.resultSubmit);
+                if(isValid){
+                    this.drover.deleteHelpTextInput();
+                    this.resultSubmit = this.collectionDateForm();
+                    this.localStor.createStorage(this.loginData);
+                    this.cb(this.resultSubmit);
+                } else{
+                    this.drover.deleteHelpTextInput();
+                    this.drover.createHelpTextInput();
+                }
             },
             titleStopPropagation = (e) => {
                 e.stopPropagation();

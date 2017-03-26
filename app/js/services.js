@@ -1,18 +1,17 @@
 class Validator {
-    constructor(date) {
-        this.date = date;
+    constructor(objectCreateInput, form) {
+        this.objectCreateInput = objectCreateInput;
+        this.form = form;
     }
 
     validationForm(dataForm) {
         let valid = true;
         for(let key in dataForm) {
-            if(this.date[key].required){
+            if(this.objectCreateInput[key].required){
                 if(!dataForm[key]) return false
             }
         }
-
         return valid;
-
     }
 }
 

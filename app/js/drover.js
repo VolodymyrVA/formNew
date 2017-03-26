@@ -48,7 +48,7 @@ class Drover {
         this.formButton = this.createElement({element:'button', class:'submit-button', attr: {
             type: 'submit',
             value: 'submit',
-            disabled: ""
+            //disabled: ""
         }, content:'Sing In'});
         this.form.appendChild(this.formButton);
         let batton = this.createElement({element:'button', class: 'lost-password', content: 'Lost Your Password ?'});
@@ -75,10 +75,10 @@ class Drover {
     validationButtonShow(isValid) {
         if (isValid) {
             this.formButton.classList.add('active');
-            this.formButton.removeAttribute('disabled');
+            //this.formButton.removeAttribute('disabled');
         } else {
             this.formButton.classList.remove('active');
-            this.formButton.setAttribute('disabled', '');
+            //this.formButton.setAttribute('disabled', '');
         }
     }
 
@@ -100,6 +100,23 @@ class Drover {
                 }
             })
         }
+    }
+
+    createHelpTextInput(){
+        let input = this.form.querySelectorAll('input');
+        input.forEach((elem, i) => {
+            if(elem.value.length == 0){
+                let span = this.createElement({element: 'span', class: 'helpInput', content: 'Fill in the field bro!  &#8595'});
+                this.form.insertBefore(span, input[i]);
+            }
+        })
+    }
+
+    deleteHelpTextInput(){
+        let span = this.form.querySelectorAll('span');
+        span.forEach((elem, i) => {
+            elem.remove(span);
+        });
     }
 }
 export default Drover
