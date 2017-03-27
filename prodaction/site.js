@@ -6,9 +6,31 @@
 
 
 var filds = {
-    username: {type: 'text', required: true},
-    password: {type: "password", required: true},
-    age: {type: 'number', required: true}
+    username: {
+        type: 'text',
+        validations: {
+            required: true,
+            minlength: 5
+        }
+    },
+    password: {
+        type: "password",
+        validations: {
+            required: true,
+            minlength: 5
+        }
+    },
+    age: {
+        type: 'number',
+        validations: {
+            required: true,
+            pattern:{
+                pattern: '^[0-9]+$',
+                requier: 'number'
+            },
+            minlength: 5
+        }
+    }
 };
 
 var loginForm = new LoginFrom(filds, (data) => {

@@ -47,20 +47,26 @@ var LoginForm = class LoginForm {
                 this.drover.hide();
             },
             form = (e) => {
-                let isValid = this.validator.validationForm(this.collectionDateForm());
-                this.drover.validationButtonShow(isValid);
+                let formData = this.collectionDateForm(),
+                    errArr = this.validator.validate(formData);
+                console.log(errArr);
+                this.drover.validationButtonShow(errArr);
             },
             formButton = (e) => {
-                let isValid = this.validator.validationForm(this.collectionDateForm());
+                let formData = this.collectionDateForm(),
+                    errArr = this.validator.validate(formData);
+
                 e.preventDefault();
-                if(isValid){
+
+
+                if(errArr){
+                    this.drover.deleteHelpTextInput(errArr);
+                    this.drover.createHelpTextInput(errArr);
+                } else{
                     this.drover.deleteHelpTextInput();
                     this.resultSubmit = this.collectionDateForm();
                     this.localStor.createStorage(this.loginData);
                     this.cb(this.resultSubmit);
-                } else{
-                    this.drover.deleteHelpTextInput();
-                    this.drover.createHelpTextInput();
                 }
             },
             titleStopPropagation = (e) => {

@@ -1,9 +1,7 @@
-#wrapper
-{
+#wrapper {
     position: relative;
-    z-index: 1;
-
     max-width: 1200px;
-    max-height: 100px;
     margin: 0 auto;
+    max-height: 100px;
+    z-index: 1;
 }

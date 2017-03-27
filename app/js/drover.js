@@ -37,7 +37,7 @@ class Drover {
 
     createInputForm(filde){
         for (let key in filde) {
-            let input = this.createElement({element:'input', class:'input-form',attr: {type: filde[key].type, placeholder: key, name: key}});
+            let input = this.createElement({element:'input', class:'input-form',attr: {type: key.type, placeholder: key, name: key}});
             this.form.appendChild(input);
         }
     }
@@ -48,7 +48,6 @@ class Drover {
         this.formButton = this.createElement({element:'button', class:'submit-button', attr: {
             type: 'submit',
             value: 'submit',
-            //disabled: ""
         }, content:'Sing In'});
         this.form.appendChild(this.formButton);
         let batton = this.createElement({element:'button', class: 'lost-password', content: 'Lost Your Password ?'});
@@ -75,10 +74,8 @@ class Drover {
     validationButtonShow(isValid) {
         if (isValid) {
             this.formButton.classList.add('active');
-            //this.formButton.removeAttribute('disabled');
         } else {
             this.formButton.classList.remove('active');
-            //this.formButton.setAttribute('disabled', '');
         }
     }
 
@@ -102,17 +99,29 @@ class Drover {
         }
     }
 
-    createHelpTextInput(){
+    errorMassage(text, place){
+        let tempText = '';
+        text.forEach((textArray, i ) => {
+            tempText += `${textArray}  `
+        })
+        let span = this.createElement({element: 'span', class: 'helpInput', content: tempText });
+        this.form.insertBefore(span, place);
+
+    }
+
+    createHelpTextInput(arrayError){
         let input = this.form.querySelectorAll('input');
-        input.forEach((elem, i) => {
-            if(elem.value.length == 0){
-                let span = this.createElement({element: 'span', class: 'helpInput', content: 'Fill in the field bro!  &#8595'});
-                this.form.insertBefore(span, input[i]);
+
+        input.forEach((element, i) => {
+            for(let key in arrayError){
+                if(element.name == key){
+                    this.errorMassage(arrayError[key],element)
+                }
             }
         })
     }
 
-    deleteHelpTextInput(){
+    deleteHelpTextInput(arrayError){
         let span = this.form.querySelectorAll('span');
         span.forEach((elem, i) => {
             elem.remove(span);

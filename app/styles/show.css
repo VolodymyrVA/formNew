@@ -70,6 +70,11 @@
     background: rgb(240,238,240);
 }
 
+/*.log-form  input:first-child {*/
+    /*background: url("../jpg/user.png") no-repeat;*/
+    /*background-size: 20px;*/
+/*}*/
+
 .submit-button
 {
     display: inline;
@@ -89,7 +94,8 @@
 
 .active
 {
-    background: #68466b;
+    /*background: #68466b;*/
+    background: green;
 }
 
 .lost-password
